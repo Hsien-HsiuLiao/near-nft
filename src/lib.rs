@@ -4,7 +4,7 @@ use near_sdk::collections::UnorderedMap;
 near_sdk::setup_alloc!();
 
 #[near_bindgen]
-#[derive(BorshDeserialize, Borsh Serialize)]
+#[derive(BorshDeserialize, BorshSerialize)]
 /*
 NFT datastructure. It is a very simple mapping between the NFT’s token ID and the owner of that NFT.
 We’ll assume that the token Id and the owner’s address are both going to be strings.
@@ -28,7 +28,11 @@ deserialize it, make the modifications, serialize it and store it back in the st
 pub struct NftOwners {
     owners: UnorderedMap<String, AccountId>,
 }
-
+/*
+Defaults are required for structs in Rust.
+You can think of this as the constructor for the ‘class’
+When we create a new UnorderedMap we also need to provide an identifier ”o” which will identify this map on the storage space.
+*/
 impl Default for NftOwners {
     fn default() -> Self {
 	Self {
@@ -43,7 +47,7 @@ impl NftOwners {
 	self.owners.insert(&token_id, &account_id);
     }
 
-    pub fn get_owner(&self, toekn_id: String) -> AccountId {
+    pub fn get_owner(&self, token_id: String) -> AccountId {
 	match self.owners.get(&token_id) {
 	    Some(owner) => owner,
 	    None => "no owner found".to_string(),
