@@ -8,3 +8,5 @@ install the WebAssembly toolchain. This will enable us to compile Rust into a We
 ```rustup target add wasm32-unknown-unknown```
 
 `build.sh` will compile your contract and copy the resulting .wasm to a result directory, where you can view it easier. Create the result directory before running this bash script. 
+
+run `sh build.sh`
