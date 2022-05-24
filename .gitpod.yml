@@ -9,4 +9,7 @@ tasks:
   - name: install wasm
     command: rustup target add wasm32-unknown-unknown
 
+  - name: install near-cli
+    command: npm install -g near-cli
+
 
